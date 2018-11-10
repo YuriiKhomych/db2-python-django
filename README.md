@@ -1,3 +1,5 @@
+# Explanation
+Tasks 1-3 located in ./tasks folder
 # Task
 1.Write a function that takes as a parameters number1(int), number2(int) and number3. (e.g. handle_numbers(number1, number2, number3))
 Function need to return the count of integers that are divisible by number3 in range [number1, number2]
