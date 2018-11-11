@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} - My Account{% endblock %}
+
+{% block content %}
+	<div class="mdl-grid mdl-layout-center mdl-padding-large">
+		<div class="mdl-cell mdl-cell--4-col">
+			<h1 class="mdl-typography--subhead">My Account</h1>
+			<div class="mdl-grid">
+				<span class="mdl-cell mdl-cell--8-col mdl-typography--body-2">Email</span>
+				<span class="mdl-cell mdl-cell--4-col mdl-typography--body-1">{{ user.email }}</span>
+			</div>
+			<div class="mdl-grid">
+				<span class="mdl-cell mdl-cell--8-col mdl-typography--body-2">Birthday</span>
+				<span class="mdl-cell mdl-cell--4-col mdl-typography--body-1">{{ user.birthday }}</span>
+			</div>
+			<div class="mdl-grid">
+				<span class="mdl-cell mdl-cell--8-col mdl-typography--body-2">Country</span>
+				<span class="mdl-cell mdl-cell--4-col mdl-typography--body-1">{{ user.country }}</span>
+			</div>
+            <div class="mdl-grid">
+				<span class="mdl-cell mdl-cell--8-col mdl-typography--body-2">City</span>
+				<span class="mdl-cell mdl-cell--4-col mdl-typography--body-1">{{ user.city }}</span>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
