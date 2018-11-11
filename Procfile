@@ -1,0 +1,1 @@
+web: gunicorn DB2_blog_post.wsgi --log-file -

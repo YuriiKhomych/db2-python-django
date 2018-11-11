@@ -58,7 +58,7 @@ class PostListView(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('accounts:sign-in')
     template_name = 'posts/posts_list.html'
     context_object_name = "posts_list"
-    paginate_by = 2
+    paginate_by = 20
 
     def get_queryset(self):
         filter_value = self.request.GET.get('filter', '')

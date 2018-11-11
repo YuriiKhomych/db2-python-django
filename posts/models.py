@@ -12,7 +12,6 @@ class Post(models.Model):
     )
     post_image = models.FileField(upload_to='post_images/',
                               blank=True, null=True)
-    document = models.FileField(upload_to='documents/', blank=True, null=True)
     liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                       related_name='liked')
     added = models.DateTimeField(auto_now_add=True)

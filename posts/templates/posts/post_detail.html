@@ -7,7 +7,6 @@
             <h1>{{ post.title }}</h1>
             <p>{{ post.body }}</p>
             <p>{{ post.image }}</p>
-            <p>{{ post.liked_by }}</p>
             <p>{{ post.added }}</p>
             <a class="waves-effect waves-light btn" href="{% url 'posts:like' post.id %}">
                 {% if request.user in post.liked_by.all %}
@@ -31,12 +30,4 @@
         <hr>
         <button type="submit" class="btn btn-primary">Comment</button>
     </form>
-
-
-    <div class="container">
-        {#        <a href="{% url 'news:feeds-create' %}" class="btn btn-primary">New Feed</a>#}
-
-
-    </div>
-
 {% endblock %}

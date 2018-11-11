@@ -33,16 +33,11 @@
                 <button type="submit" class="waves-effect waves-light btn">Search</button>
             </div>
         </form>
-    {#    <form method="get" action="{% url 'posts:list' %}">#}
-    {#        <p>order_by: <input type="text" value="-added" name="orderby" /></p>#}
-    {#        <p><input type="submit" name="submit" value="submit"/></p>#}
-    {#    </form>#}
     <div class="container">
         {% for post in object_list %}
             <p><b>Title:</b> {{ post.title }}</p>
             <p><b>Body:</b> {{ post.body }}</p>
             <p><b>Author:</b> {{ post.author }}</p>
-            {{ post.document }}
             <p><b>Image:</b> <img src="{{ post.post_image }}" alt="image"></p>
             <p><b>Post added:</b>
                 {% if post.added %}
