@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.body }}</p>
+            <p>{{ post.image }}</p>
+            <p>{{ post.liked_by }}</p>
+            <p>{{ post.added }}</p>
+            <a class="waves-effect waves-light btn" href="{% url 'posts:like' post.id %}">
+                {% if request.user in post.liked_by.all %}
+                    Unlike {{ post.liked_by.all.count }}
+                {% else %}
+                    Like {{ post.liked_by.all.count }}
+                {% endif %}
+            </a>
+        </div>
+    </div>
+    {% for comment in post.comments.all %}
+        <div>{{ comment.date }} {{ comment.author }}</div>
+        <div>{{ comment.body }}</div>
+    {% empty %}
+        <p>No comments here yet.</p>
+    {% endfor %}
+    <h1>New comment</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <hr>
+        <button type="submit" class="btn btn-primary">Comment</button>
+    </form>
+
+
+    <div class="container">
+        {#        <a href="{% url 'news:feeds-create' %}" class="btn btn-primary">New Feed</a>#}
+
+
+    </div>
+
+{% endblock %}

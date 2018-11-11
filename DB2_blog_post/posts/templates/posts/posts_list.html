@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Posts</h1>
+            <p>Have a look around to see some of the latest and greatest posts</p>
+        </div>
+    </div>
+    <div>Order by</div>
+    <div>
+        <a class="waves-effect waves-light btn" href="{% url 'posts:list' %}?order_by=-added">recently added posts</a>
+    </div>
+    <div>
+        <a class="waves-effect waves-light btn" href="{% url 'posts:list' %}?order_by=added">lately added posts</a>
+    </div>
+    <div>
+        <a class="waves-effect waves-light btn" href="{% url 'posts:list' %}?order_by=title">posts title</a>
+    </div>
+    <div>
+        <a class="waves-effect waves-light btn" href="{% url 'posts:list' %}?order_by=liked_by">most liked title</a>
+    </div>
+    <div>
+        <a class="waves-effect waves-light btn" href="{% url 'posts:list' %}?order_by=-liked_by">least liked title</a>
+    </div>
+    <form action="{% url 'posts:list' %}" method="GET">
+            <div class="row">
+                <h5>Search post by title: </h5>
+                <div class="input-field">
+                    <input type="text" name="filter" />
+                </div>
+                <button type="submit" class="waves-effect waves-light btn">Search</button>
+            </div>
+        </form>
+    {#    <form method="get" action="{% url 'posts:list' %}">#}
+    {#        <p>order_by: <input type="text" value="-added" name="orderby" /></p>#}
+    {#        <p><input type="submit" name="submit" value="submit"/></p>#}
+    {#    </form>#}
+    <div class="container">
+        {% for post in object_list %}
+            <p><b>Title:</b> {{ post.title }}</p>
+            <p><b>Body:</b> {{ post.body }}</p>
+            <p><b>Author:</b> {{ post.author }}</p>
+            {{ post.document }}
+            <p><b>Image:</b> <img src="{{ post.post_image }}" alt="image"></p>
+            <p><b>Post added:</b>
+                {% if post.added %}
+                    {{ post.added }}
+                {% else %}
+                    Publication date not set on post
+                {% endif %}
+            </p>
+            <div><a class="waves-effect waves-light btn" href="{% url 'posts:detail' post.id %}">More</a></div>
+            <a class="waves-effect waves-light btn" href="{% url 'posts:like' post.id %}">
+                {% if request.user in post.liked_by.all %}
+                    Unlike {{ post.liked_by.all.count }}
+                {% else %}
+                    Like {{ post.liked_by.all.count }}
+                {% endif %}
+            </a>
+            <hr>
+
+            </div>
+        {% endfor %}
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{% url 'posts:list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{% url 'posts:list' %}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    {% if not object_list %}
+        <p>There is not posts yet)</p>
+    {% endif %}
+
+{% endblock %}
